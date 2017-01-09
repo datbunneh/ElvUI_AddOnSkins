@@ -53,7 +53,7 @@ function module:Show()
 	end
 	module:ToggleChatFrame(true);
 	module.switchButton:SetAlpha(1);
-	E.db.addOnSkins.embed.embedHiden = false;
+	E.db.addOnSkins.embed.isShow = true;
 end
 
 function module:Hide()
@@ -73,7 +73,7 @@ function module:Hide()
 	end
 	module:ToggleChatFrame(false);
 	module.switchButton:SetAlpha(0.6);
-	E.db.addOnSkins.embed.embedHiden = true;
+	E.db.addOnSkins.embed.isShow = false;
 end
 
 function module:CheckAddOn(addOn)
@@ -134,12 +134,12 @@ function module:Toggle()
 		end
 	end
 
-	if(E.db.addOnSkins.embed.embedHiden) then
-		self.left:Hide();
-		self:Hide();
-	else
+	if(E.db.addOnSkins.embed.isShow) then
 		self.left:Show();
 		self:Show();
+	else
+		self.left:Hide();
+		self:Hide();
 	end
 end
 
@@ -259,12 +259,12 @@ if(addon:CheckAddOn("Skada")) then
 end
 
 function module:Hooks()
-	local function ChatPanelLeft_OnFade(self)
+	local function ChatPanelLeft_OnFade()
 		LeftChatPanel:Hide();
 		_G[addonName .. "_Embed_SwitchButton"]:Hide();
 	end
 
-	local function ChatPanelRight_OnFade(self)
+	local function ChatPanelRight_OnFade()
 		RightChatPanel:Hide();
 		_G[addonName .. "_Embed_SwitchButton"]:Hide();
 	end
@@ -297,7 +297,7 @@ function module:Hooks()
 		module:UpdateSwitchButton();
 	end);
 
-	RightChatToggleButton:HookScript("OnEnter", function(self, ...)
+	RightChatToggleButton:HookScript("OnEnter", function()
 		if(E.db.addOnSkins.embed.rightChat) then
 			GameTooltip:AddDoubleLine(L["Right Click:"], L["Toggle Embedded Addon"], 1, 1, 1);
 			GameTooltip:Show();
@@ -330,7 +330,7 @@ function module:Hooks()
 		module:UpdateSwitchButton();
 	end);
 
-	LeftChatToggleButton:HookScript("OnEnter", function(self, ...)
+	LeftChatToggleButton:HookScript("OnEnter", function()
 		if(not E.db.addOnSkins.embed.rightChat) then
 			GameTooltip:AddDoubleLine(L["Right Click:"], L["Toggle Embedded Addon"], 1, 1, 1);
 			GameTooltip:Show();
@@ -428,9 +428,9 @@ function module:Init()
 		self.switchButton.text:SetTextColor(unpack(E["media"].rgbvaluecolor));
 		self.switchButton.text:SetPoint("LEFT", 16, -5);
 		self.switchButton:SetScript("OnClick", function(self, button)
-			--if(fTable[self.text:GetText()]) then
-			--	fTable[self.text:GetText()](self, button);
-			--else
+		--	if(fTable[self.text:GetText()]) then
+		--		fTable[self.text:GetText()](self, button);
+		--	else
 				if(module.left:IsShown()) then
 					module.left:Hide();
 					self:SetAlpha(0.6);
@@ -439,7 +439,7 @@ function module:Init()
 					self:SetAlpha(1);
 				end
 				module:UpdateSwitchButton();
-			--end
+		--	end
 		end);
 		self.switchButton:SetScript("OnMouseDown", function(self) self.text:SetPoint("LEFT", 18, -7); end);
 		self.switchButton:SetScript("OnMouseUp", function(self) self.text:SetPoint("LEFT", 16, -5); end);

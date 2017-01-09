@@ -31,4 +31,13 @@
 	<Script file="moveAnything.lua"/>
 	<Script file="vanasKoS.lua"/>
 	<Script file="bindPad.lua"/>
+	<Script file="zygorGuidesViewer.lua"/>
+	<Script file="zygorTalentAdvisor.lua"/>
+	<Script file="wowLua.lua"/>
+	<Script file="chatBar.lua"/>
+	<Script file="skillet.lua"/>
+	<Script file="totemTimers.lua"/>
+	<Script file="plateBuffs.lua"/>
+	<Script file="mageNuggets.lua"/>
+	<Script file="inspectEquip.lua"/>
 </Ui>

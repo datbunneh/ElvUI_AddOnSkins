@@ -1,4 +1,3 @@
-local addonName = ...;
 local E, L, V, P, G = unpack(ElvUI);
 
 P.addOnSkins = {
@@ -15,8 +14,13 @@ P.addOnSkins = {
 	weakAuraAuraBar = true,
 	weakAuraIconCooldown = true,
 
+	chatBarSize = 16,
+	chatBarSpacing = 1,
+	chatBarTextPoint = "LEFT",
+	chatBarTextXOffset = 16,
+	chatBarTextYOffset = 0,
+
 	embed = {
-		embedHiden = false,
 		embedType = "DISABLE",
 		left = "Skada",
 		right = "Skada",
@@ -24,6 +28,7 @@ P.addOnSkins = {
 		leftWidth = 200,
 		belowTop = false,
 		hideChat = "NONE",
+		isShow = true,
 	}
 };
 
@@ -60,6 +65,15 @@ V.addOnSkins = {
 	MoveAnything = true,
 	VanasKoS = true,
 	BindPad = true,
+	ZygorGuidesViewer = true,
+	ZygorTalentAdvisor = true,
+	WowLua = true,
+	ChatBar = true,
+	Skillet = true,
+	TotemTimers = true,
+	PlateBuffs = true,
+	MageNuggets = true,
+	InspectEquip = true,
 
 	Blizzard_WorldStateFrame = true,
 };

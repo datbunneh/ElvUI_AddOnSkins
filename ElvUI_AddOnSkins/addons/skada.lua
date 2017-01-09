@@ -1,11 +1,11 @@
 local E, L, V, P, G, _ = unpack(ElvUI);
-local addon = E:GetModule("AddOnSkins");
+local S = E:GetModule("Skins");
 
-if(not addon:CheckAddOn("Skada")) then return; end
+local function LoadSkin()
+	if(not E.private.addOnSkins.Skada) then return; end
 
-function addon:Skada()
 	local displayBar = Skada.displays["bar"];
-	hooksecurefunc(displayBar, "ApplySettings", function(self, win)
+	hooksecurefunc(displayBar, "ApplySettings", function(_, win)
 		local skada = win.bargroup;
 		if(win.db.enabletitle) then
 			skada.button:SetBackdrop(nil);
@@ -13,19 +13,11 @@ function addon:Skada()
 				skada.button:CreateBackdrop();
 				skada.button.backdrop:SetFrameLevel(skada.button:GetFrameLevel());
 			end
-			if(E.db.addOnSkins.skadaTitleTemplate == "NONE") then
-				skada.button.backdrop:SetBackdrop(nil);
-			else
-				skada.button.backdrop:SetTemplate(E.db.addOnSkins.skadaTitleTemplate, E.db.addOnSkins.skadaTitleTemplate == "Default" and E.db.addOnSkins.skadaTitleTemplateGloss or false);
-			end
+			skada.button.backdrop:SetTemplate(E.db.addOnSkins.skadaTitleTemplate, E.db.addOnSkins.skadaTitleTemplate == "Default" and E.db.addOnSkins.skadaTitleTemplateGloss or false);
 		end
 
 		if(win.db.enablebackground) then
-			if(E.db.addOnSkins.skadaTemplate == "NONE") then
-				skada.bgframe:SetBackdrop(nil);
-			else
-				skada.bgframe:SetTemplate(E.db.addOnSkins.skadaTemplate, E.db.addOnSkins.skadaTemplate == "Default" and E.db.addOnSkins.skadaTemplateGloss or false);
-			end
+			skada.bgframe:SetTemplate(E.db.addOnSkins.skadaTemplate, E.db.addOnSkins.skadaTemplate == "Default" and E.db.addOnSkins.skadaTemplateGloss or false);
 			if(skada.bgframe) then
 				skada.bgframe:ClearAllPoints();
 				if(win.db.reversegrowth) then
@@ -50,12 +42,6 @@ function addon:Skada()
 
 	hooksecurefunc(Skada, "DeleteWindow", function()
 		if(module:CheckAddOn("Skada")) then
-			module:Skada();
-		end
-	end);
-
-	hooksecurefunc(Skada, "UpdateDisplay", function(self, force)
-		if(module:CheckAddOn("Skada") and not force) then
 			module:Skada();
 		end
 	end);
@@ -87,4 +73,4 @@ function addon:Skada()
 	end);
 end
 
-addon:RegisterSkin("Skada", addon.Skada);
+S:AddCallbackForAddon("Skada", "Skada", LoadSkin);

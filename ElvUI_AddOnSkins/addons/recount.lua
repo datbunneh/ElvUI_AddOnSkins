@@ -1,10 +1,9 @@
 local E, L, V, P, G = unpack(ElvUI);
-local addon = E:GetModule("AddOnSkins");
 local S = E:GetModule("Skins");
 
-if(not addon:CheckAddOn("Recount")) then return; end
+local function LoadSkin()
+	if(not E.private.addOnSkins.Recount) then return; end
 
-function addon:Recount()
 	local MainWindow = Recount.MainWindow;
 	MainWindow:SetBackdrop(nil);
 
@@ -51,6 +50,21 @@ function addon:Recount()
 			button:GetHighlightTexture():SetDesaturated(true);
 		end
 	end
+
+	hooksecurefunc(Recount, "HideScrollbarElements", function(self, name)
+		_G[name .. "ScrollBar"].trackbg:Hide();
+		_G[name .. "ScrollBar"].thumbbg:Hide();
+	end);
+	hooksecurefunc(Recount, "ShowScrollbarElements", function(self, name)
+		_G[name .. "ScrollBar"].trackbg:Show();
+		_G[name .. "ScrollBar"].thumbbg:Show();
+	end);
+
+	if(Recount.db.profile.MainWindow.ShowScrollbar) then
+		Recount:ShowScrollbarElements("Recount_MainWindow_ScrollBar");
+	else
+		Recount:HideScrollbarElements("Recount_MainWindow_ScrollBar");
+	end
 end
 
-addon:RegisterSkin("Recount", addon.Recount);
+S:AddCallbackForAddon("Recount", "Recount", LoadSkin);
