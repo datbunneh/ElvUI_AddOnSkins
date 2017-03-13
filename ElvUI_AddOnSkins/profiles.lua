@@ -17,7 +17,7 @@ P.addOnSkins = {
 	chatBarSize = 16,
 	chatBarSpacing = 1,
 	chatBarTextPoint = "LEFT",
-	chatBarTextXOffset = 16,
+	chatBarTextXOffset = -3,
 	chatBarTextYOffset = 0,
 
 	embed = {
@@ -74,6 +74,10 @@ V.addOnSkins = {
 	PlateBuffs = true,
 	MageNuggets = true,
 	InspectEquip = true,
+	AdvancedTradeSkillWindow = true,
+	AtlasQuest = true,
+	AckisRecipeList = true,
+	LightHeaded = true,
 
 	Blizzard_WorldStateFrame = true,
 };

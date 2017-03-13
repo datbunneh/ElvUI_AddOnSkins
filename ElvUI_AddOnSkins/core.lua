@@ -285,6 +285,30 @@ local function getOptions()
 						desc = L["TOGGLESKIN_DESC"],
 						hidden = function() return not addon:CheckAddOn("InspectEquip"); end
 					},
+					AdvancedTradeSkillWindow = {
+						type = "toggle",
+						name = "AdvancedTradeSkillWindow",
+						desc = L["TOGGLESKIN_DESC"],
+						hidden = function() return not addon:CheckAddOn("AdvancedTradeSkillWindow"); end
+					},
+					AtlasQuest = {
+						type = "toggle",
+						name = "AtlasQuest",
+						desc = L["TOGGLESKIN_DESC"],
+						hidden = function() return not addon:CheckAddOn("AtlasQuest"); end
+					},
+					AckisRecipeList = {
+						type = "toggle",
+						name = "AckisRecipeList",
+						desc = L["TOGGLESKIN_DESC"],
+						hidden = function() return not addon:CheckAddOn("AckisRecipeList"); end
+					},
+					LightHeaded = {
+						type = "toggle",
+						name = "LightHeaded",
+						desc = L["TOGGLESKIN_DESC"],
+						hidden = function() return not addon:CheckAddOn("LightHeaded"); end
+					},
 				}
 			},
 			blizzard = {
