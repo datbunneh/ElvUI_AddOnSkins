@@ -10,7 +10,7 @@ local hooksecurefunc = hooksecurefunc
 local function LoadSkin()
 	if(not E.private.addOnSkins.AckisRecipeList) then return; end
 
-	local addon = LibStub("AceAddon-3.0"):GetAddon("Ackis Recipe List")
+	local addon = LibStub("AceAddon-3.0"):GetAddon("Ackis Recipe List", true)
 	if not addon then return end
 
 	local function HandleScrollBar(frame)
@@ -67,6 +67,12 @@ local function LoadSkin()
 	end
 
 	S:HandleButton(addon.scan_button)
+
+	hooksecurefunc(addon, "TRADE_SKILL_SHOW", function(self)
+		if self.scan_button:GetParent() == TradeSkillFrame then
+			self.scan_button:SetFrameLevel(TradeSkillFrame:GetFrameLevel() + 10)
+		end
+	end)
 
 	hooksecurefunc(addon, "Scan", function(self)
 		if self.isSkinned then return end
@@ -226,12 +232,15 @@ local function LoadSkin()
 				E:GetModule("Tooltip"):SetStyle(self)
 			end)
 
-			hooksecurefunc(LibStub("LibQTip-1.0"), "Acquire", function(self, key)
-				local tooltip = self.activeTooltips[key]
-				if tooltip then
-					E:GetModule("Tooltip"):SetStyle(tooltip)
-				end
-			end)
+			local LibQTip = LibStub("LibQTip-1.0")
+			if LibQTip and not S:IsHooked(LibQTip, "Acquire") then
+				S:RawHook(LibQTip, "Acquire", function(self, key)
+					local tooltip = self.activeTooltips[key]
+					if tooltip then
+						E:GetModule("Tooltip"):SetStyle(tooltip)
+					end
+				end)
+			end
 		end
 
 		hooksecurefunc(ARL_MainPanel, "ToggleState", function(self)

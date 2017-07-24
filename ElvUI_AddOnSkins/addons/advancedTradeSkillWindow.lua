@@ -43,6 +43,8 @@ local function LoadSkin()
 		"ATSWBuyReagentsButton",
 		-- Options
 		"ATSWOptionsFrameOKButton",
+		-- Merchant Frame
+		"ATSWAutoBuyButton",
 	}
 
 	local checkBoxes = {
@@ -132,13 +134,13 @@ local function LoadSkin()
 	ATSWFrame:CreateBackdrop("Transparent")
 	ATSWFrame.backdrop:Point("TOPLEFT", 10, -12)
 	ATSWFrame.backdrop:Point("BOTTOMRIGHT", -34, 10)
-	ATSWFrame:SetClampedToScreen()
+	ATSWFrame:SetClampedToScreen(true)
 
 	ATSWCSFrame:StripTextures()
 	ATSWCSFrame:CreateBackdrop("Transparent")
 	ATSWCSFrame.backdrop:Point("TOPLEFT", 10, -12)
 	ATSWCSFrame.backdrop:Point("BOTTOMRIGHT", -34, 10)
-	ATSWCSFrame:SetClampedToScreen()
+	ATSWCSFrame:SetClampedToScreen(true)
 
 	ATSWReagentFrame:StripTextures()
 	ATSWReagentFrame:CreateBackdrop("Transparent")

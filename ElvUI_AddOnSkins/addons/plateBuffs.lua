@@ -9,7 +9,8 @@ local hooksecurefunc = hooksecurefunc;
 local function LoadSkin()
 	if(not E.private.addOnSkins.PlateBuffs) then return; end
 
-	local core = LibStub("AceAddon-3.0"):GetAddon("PlateBuffs");
+	local core = LibStub("AceAddon-3.0"):GetAddon("PlateBuffs", true);
+	if not core then return end
 
 	local buffBars = core.buffBars;
 	local buffFrames = core.buffFrames;
@@ -40,7 +41,7 @@ local function LoadSkin()
 		end
 
 		local prevFrame = buffFrames[plate][total];
-		for i = 2, self.db.profile.iconsPerBar do 
+		for i = 2, self.db.profile.iconsPerBar do
 			total = total + 1;
 			if(buffFrames[plate][total]) then
 				StyleAuraIcon(buffFrames[plate][total]);
@@ -51,8 +52,8 @@ local function LoadSkin()
 		end
 
 		if(self.db.profile.numBars > 1) then
-			for r = 2, self.db.profile.numBars do 
-				for i = 1, self.db.profile.iconsPerBar do 
+			for r = 2, self.db.profile.numBars do
+				for i = 1, self.db.profile.iconsPerBar do
 					total = total + 1;
 					if(buffFrames[plate][total]) then
 						StyleAuraIcon(buffFrames[plate][total]);
